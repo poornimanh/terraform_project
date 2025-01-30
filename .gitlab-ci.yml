@@ -4,7 +4,8 @@ stages:
   - plan
   - apply
 
-image: hashicorp/terraform:1.5.0  # Official Terraform Docker image
+image: hashicorp/terraform:latest
+
 
 variables:
   TF_ENV: "default"  # You can set this to any environment label you want
