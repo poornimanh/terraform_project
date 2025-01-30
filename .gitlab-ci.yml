@@ -6,20 +6,17 @@ stages:
 
 image: hashicorp/terraform:latest
 
-
 variables:
-  TF_ENV: "default"  # You can set this to any environment label you want
-  TF_WORKING_DIR: "."  # This points to the root folder where your Terraform files are (i.e., the current directory)
-  TF_VERSION: "1.10.5"  # Required Terraform version
+  TF_ENV: "default"
+  TF_WORKING_DIR: "."
+  TF_VERSION: "1.10.5"
 
 before_script:
-  # Ensure Terraform is installed on your GitLab runner
+  - echo "Ensuring correct Terraform version is installed..."
   - terraform --version
-  - tfenv install $TF_VERSION  # Install the required Terraform version (if not installed)
-  - echo "Using bash shell..."
-  - /bin/bash -c 'terraform --version' # Ensure the correct version is installed
+  - tfenv install $TF_VERSION
+  - /bin/bash -c 'echo "Using bash shell..." && terraform --version'
 
-# Stage 1: Terraform Init
 terraform-init:
   stage: init
   script:
@@ -29,7 +26,6 @@ terraform-init:
   only:
     - master
 
-# Stage 2: Terraform Validate
 terraform-validate:
   stage: validate
   script:
@@ -39,7 +35,6 @@ terraform-validate:
   only:
     - master
 
-# Stage 3: Terraform Plan
 terraform-plan:
   stage: plan
   script:
@@ -48,17 +43,16 @@ terraform-plan:
     - terraform plan -out=tfplan
   artifacts:
     paths:
-      - $TF_WORKING_DIR/tfplan  # Store the Terraform plan file as an artifact
+      - $TF_WORKING_DIR/tfplan
   only:
     - master
 
-# Stage 4: Terraform Apply (manual trigger)
 terraform-apply:
   stage: apply
   script:
     - echo "Applying Terraform changes for $TF_ENV environment..."
     - cd $TF_WORKING_DIR
-    - terraform apply -auto-approve tfplan  # Apply changes based on the plan
-  when: manual  # This ensures the apply step is manually triggered
+    - terraform apply -auto-approve tfplan
+  when: manual
   only:
     - master
