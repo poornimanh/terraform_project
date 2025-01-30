@@ -17,7 +17,6 @@ before_script:
   - tfenv install $TF_VERSION  # Install the required Terraform version (if not installed)
   - terraform --version  # Ensure the correct version is installed
 
-
 # Stage 1: Terraform Init
 terraform-init:
   stage: init
