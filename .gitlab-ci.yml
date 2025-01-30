@@ -15,7 +15,8 @@ before_script:
   - echo "Ensuring correct Terraform version is installed..."
   - terraform --version
   - tfenv install $TF_VERSION
-  - /bin/bash -c 'echo "Using bash shell..." && terraform --version'
+  - echo "Using bash shell..."
+  - terraform --version
 
 terraform-init:
   stage: init
