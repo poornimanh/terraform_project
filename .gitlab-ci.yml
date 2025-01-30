@@ -1,0 +1,60 @@
+stages:
+  - init
+  - validate
+  - plan
+  - apply
+
+image: hashicorp/terraform:1.5.0  # Official Terraform Docker image
+
+variables:
+  TF_ENV: "default"  # You can set this to any environment label you want
+  TF_WORKING_DIR: "."  # This points to the root folder where your Terraform files are (i.e., the current directory)
+  TF_VERSION: "1.10.5"  # Required Terraform version
+
+before_script:
+  # Ensure Terraform is installed on your GitLab runner
+  - terraform --version
+
+# Stage 1: Terraform Init
+terraform-init:
+  stage: init
+  script:
+    - echo "Initializing Terraform for $TF_ENV environment..."
+    - cd $TF_WORKING_DIR
+    - terraform init
+  only:
+    - master
+
+# Stage 2: Terraform Validate
+terraform-validate:
+  stage: validate
+  script:
+    - echo "Validating Terraform configuration for $TF_ENV environment..."
+    - cd $TF_WORKING_DIR
+    - terraform validate
+  only:
+    - master
+
+# Stage 3: Terraform Plan
+terraform-plan:
+  stage: plan
+  script:
+    - echo "Planning Terraform changes for $TF_ENV environment..."
+    - cd $TF_WORKING_DIR
+    - terraform plan -out=tfplan
+  artifacts:
+    paths:
+      - $TF_WORKING_DIR/tfplan  # Store the Terraform plan file as an artifact
+  only:
+    - master
+
+# Stage 4: Terraform Apply (manual trigger)
+terraform-apply:
+  stage: apply
+  script:
+    - echo "Applying Terraform changes for $TF_ENV environment..."
+    - cd $TF_WORKING_DIR
+    - terraform apply -auto-approve tfplan  # Apply changes based on the plan
+  when: manual  # This ensures the apply step is manually triggered
+  only:
+    - master
