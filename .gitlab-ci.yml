@@ -9,7 +9,7 @@ image: alpine:latest
 variables:
   TF_ENV: "default"
   TF_WORKING_DIR: "/builds/naidhilebhuvana/terraform_docker_project"
-  TF_VERSION: "1.6.0"
+  TF_VERSION: "1.10.5"
 
 before_script:
   - echo "Installing dependencies..."
@@ -37,6 +37,7 @@ terraform-validate:
   script:
     - echo "Validating Terraform configuration for $TF_ENV environment..."
     - cd $TF_WORKING_DIR
+    - terraform init -input=false 
     - terraform validate
   rules:
     - if: $CI_COMMIT_BRANCH == "master"
