@@ -8,18 +8,15 @@ image: alpine:latest
 
 variables:
   TF_ENV: "default"
-  TF_WORKING_DIR: "."
-  TF_VERSION: "1.10.5"
-
-variables:
   TF_WORKING_DIR: "/builds/naidhilebhuvana/terraform_docker_project"
-
+  TF_VERSION: "1.6.0"
 
 before_script:
   - echo "Installing dependencies..."
   - apk add --no-cache curl unzip
   - echo "Installing Terraform..."
   - curl -LO https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_amd64.zip
+  - ls -lh terraform_${TF_VERSION}_linux_amd64.zip
   - unzip terraform_${TF_VERSION}_linux_amd64.zip -d /usr/local/bin
   - rm terraform_${TF_VERSION}_linux_amd64.zip
   - echo "Ensuring correct Terraform version is installed..."
