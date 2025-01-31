@@ -37,7 +37,6 @@ terraform-validate:
   script:
     - echo "Validating Terraform configuration for $TF_ENV environment..."
     - cd $TF_WORKING_DIR
-    - terraform init -input=false 
     - terraform validate
   rules:
     - if: $CI_COMMIT_BRANCH == "master"
