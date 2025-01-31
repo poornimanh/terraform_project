@@ -6,6 +6,9 @@ stages:
 
 image: alpine:latest
 
+services:
+  - docker:19.03.12-dind
+
 variables:
   TF_ENV: "default"
   TF_WORKING_DIR: "/builds/naidhilebhuvana/terraform_docker_project"
