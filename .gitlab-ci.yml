@@ -56,6 +56,7 @@ terraform-apply:
   stage: apply
   script:
     - echo "Applying Terraform changes for $TF_ENV environment..."
+    - echo "complete"
     - cd $TF_WORKING_DIR
     - terraform apply -auto-approve tfplan
   when: manual
