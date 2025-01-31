@@ -28,7 +28,7 @@ terraform-init:
   script:
     - echo "Initializing Terraform for $TF_ENV environment..."
     - cd $TF_WORKING_DIR
-    - terraform init
+    - terraform init -upgrade
   rules:
     - if: $CI_COMMIT_BRANCH == "master"
 
