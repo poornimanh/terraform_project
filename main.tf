@@ -7,9 +7,16 @@ terraform {
   }
 }
 
+variable "os_type" {
+  description = "Operating System Type"
+  type        = string
+  default     = "linux"  # Default to Linux for CI/CD environments
+}
+
 provider "docker" {
   host = "npipe:////./pipe/docker_engine"
 }
+
 
 resource "docker_container" "my_app" {
   image = "flask_app_image"
