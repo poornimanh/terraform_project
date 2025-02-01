@@ -8,7 +8,6 @@ image: alpine:latest
 
 services:
   - docker:19.03.12-dind
-  privileged: true
 
 variables:
   TF_ENV: "default"
