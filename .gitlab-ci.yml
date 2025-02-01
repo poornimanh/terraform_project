@@ -7,12 +7,17 @@ stages:
 image: alpine:latest
 
 services:
-  - docker:19.03.12-dind
+  - name: docker:19.03.12-dind
+    alias: docker
 
 variables:
   TF_ENV: "default"
   TF_WORKING_DIR: "/builds/naidhilebhuvana/terraform_docker_project"
   TF_VERSION: "1.10.5"
+  DOCKER_HOST: tcp://docker:2375/
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: ""
+
 
 before_script:
   - export DOCKER_HOST="tcp://docker:2375"
