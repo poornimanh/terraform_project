@@ -58,6 +58,7 @@ terraform-plan:
     - cd $TF_WORKING_DIR
     - terraform init
     - echo terraform plan -out=tfplan
+    - echo complete
   artifacts:
     paths:
       - $TF_WORKING_DIR/tfplan
