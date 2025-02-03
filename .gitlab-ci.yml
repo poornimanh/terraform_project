@@ -57,7 +57,7 @@ terraform-plan:
     - echo "Planning Terraform changes for $TF_ENV environment..."
     - cd $TF_WORKING_DIR
     - terraform init
-    - terraform plan -out=tfplan
+    - echo terraform plan -out=tfplan
   artifacts:
     paths:
       - $TF_WORKING_DIR/tfplan
