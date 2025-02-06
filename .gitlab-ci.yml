@@ -12,7 +12,7 @@ services:
 
 variables:
   TF_ENV: "default"
-  TF_WORKING_DIR: "/builds/naidhilebhuvana/terraform_docker_project"
+  TF_WORKING_DIR: "/builds/nikhithajs594/terraform_project"
   TF_VERSION: "1.10.5"
   DOCKER_HOST: tcp://docker:2375/
   DOCKER_DRIVER: overlay2
