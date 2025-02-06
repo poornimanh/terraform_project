@@ -39,7 +39,7 @@ terraform-init:
     - cd $TF_WORKING_DIR
     - terraform init -upgrade
   rules:
-    - if: $CI_COMMIT_BRANCH == "master"
+    - if: $CI_COMMIT_BRANCH == "main"
 
 terraform-validate:
   stage: validate
@@ -49,7 +49,7 @@ terraform-validate:
     - terraform init -input=false 
     - terraform validate
   rules:
-    - if: $CI_COMMIT_BRANCH == "master"
+    - if: $CI_COMMIT_BRANCH == "main"
 
 terraform-plan:
   stage: plan
@@ -58,12 +58,11 @@ terraform-plan:
     - cd $TF_WORKING_DIR
     - terraform init
     - echo terraform plan -out=tfplan
-    - echo complete
   artifacts:
     paths:
       - $TF_WORKING_DIR/tfplan
   rules:
-    - if: $CI_COMMIT_BRANCH == "master"
+    - if: $CI_COMMIT_BRANCH == "main"
 
 terraform-apply:
   stage: apply
@@ -75,4 +74,4 @@ terraform-apply:
     - echo complete
   when: manual
   rules:
-    - if: $CI_COMMIT_BRANCH == "master"
+    - if: $CI_COMMIT_BRANCH == "main"
