@@ -72,6 +72,7 @@ terraform-apply:
     - echo "complete"
     - cd $TF_WORKING_DIR
     - echo terraform apply -auto-approve tfplan
+    - echo complete
   when: manual
   rules:
     - if: $CI_COMMIT_BRANCH == "master"
