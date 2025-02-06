@@ -13,8 +13,8 @@ provider "docker" {
 
 
 resource "docker_container" "my_app" {
-  image = "flask_app_image"
-  name  = "my_flask_container"
+  image = "flask_image"
+  name  = "flask_container"
   ports {
     internal = 5000
     external = 5000
